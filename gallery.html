@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gallery - Sakuna Kavinda</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link rel="stylesheet" href="style.css">
+    <style>
+        /* Full Gallery Page Styles */
+        .gallery-page {
+            padding: 2rem 1rem;
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+        
+        .gallery-header {
+            text-align: center;
+            margin-bottom: 3rem;
+        }
+        
+        .gallery-header h1 {
+            font-size: 2.5rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
+            color: #333;
+        }
+        
+        .gallery-header p {
+            font-size: 1.125rem;
+            color: #666;
+            margin-bottom: 2rem;
+        }
+        
+        .back-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            background: #000;
+            color: white;
+            padding: 0.75rem 1.5rem;
+            border-radius: 9999px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            margin-bottom: 2rem;
+        }
+        
+        .back-btn:hover {
+            background: #333;
+            transform: translateY(-2px);
+            color: white;
+            text-decoration: none;
+        }
+        
+        .full-gallery-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+        
+        .full-gallery-video {
+            background: white;
+            border-radius: 1rem;
+            overflow: hidden;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+            transition: all 0.3s ease;
+        }
+        
+        .full-gallery-video:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 15px rgba(0,0,0,0.2);
+        }
+        
+        .full-gallery-video video {
+            width: 100%;
+            height: auto;
+            display: block;
+        }
+        
+        @media (max-width: 768px) {
+            .gallery-header h1 {
+                font-size: 2rem;
+            }
+            
+            .full-gallery-grid {
+                grid-template-columns: 1fr;
+                gap: 1.5rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="gallery-page">
+        <a href="index.html" class="back-btn">
+            <i class="fas fa-arrow-left"></i>
+            Back to Home
+        </a>
+        
+        <div class="gallery-header">
+            <h1>Video Gallery</h1>
+            <p>Explore all my performance videos and content</p>
+        </div>
+        
+        <div id="full-gallery-container" class="full-gallery-grid">
+            <!-- Videos will be loaded here by JavaScript -->
+        </div>
+    </div>
+
+    <script>
+        // All gallery videos data
+        const allGalleryVideos = [
+            { src: "media/vd1.mp4" },
+            { src: "media/vd2.mp4" },
+            { src: "media/vd3.mp4" },
+            { src: "media/vd4.mp4" },
+            { src: "media/vd5.mp4" }
+        ];
+
+        // Display all videos in full gallery
+        function displayFullGallery() {
+            const container = document.getElementById("full-gallery-container");
+            allGalleryVideos.forEach((video, index) => {
+                const videoDiv = document.createElement("div");
+                videoDiv.className = "full-gallery-video";
+                videoDiv.style.animationDelay = `${index * 0.1}s`;
+                videoDiv.innerHTML = `
+                    <video controls preload="metadata">
+                        <source src="${video.src}" type="video/mp4">
+                        Your browser does not support the video tag.
+                    </video>
+                `;
+                container.appendChild(videoDiv);
+            });
+        }
+
+        // Initialize gallery
+        document.addEventListener('DOMContentLoaded', function() {
+            displayFullGallery();
+        });
+    </script>
+</body>
+</html>
